@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>匿名作品集 | Anonymous Portfolio</title>
+  <meta name="description" content="一份匿名的个人作品集 UI 展示：四个零依赖手写项目与编辑风格的站点设计。不含任何身份与联系方式。" />
+  <!-- 社交分享（微信/LinkedIn/X 卡片） -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="匿名作品集 | Anonymous Portfolio" />
+  <meta property="og:description" content="四个零依赖手写项目：AI 策略游戏 ×2、Chrome 扩展、本站。纯 UI 展示，不含身份信息。" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="theme-color" content="#f5f1e8" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#16130f" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%2316130F'/><text x='50' y='70' font-size='48' text-anchor='middle' fill='%23F5F1E8'>◈</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Noto+Serif+SC:wght@600;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <noscript>
+    <!-- JS 关闭时直接显示所有内容（否则入场动画会把内容藏住） -->
+    <style>.reveal, .reveal-up { opacity: 1 !important; transform: none !important; animation: none !important; } .preloader { display: none !important; }</style>
+  </noscript>
+</head>
+<body>
+
+  <!-- 顶部阅读进度条 -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- 开场载入动画 -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-name">
+      <span style="--i:0">作</span><span style="--i:1">品</span><span style="--i:2">集</span>
+    </div>
+    <div class="preloader-sub">PORTFOLIO · 2026</div>
+  </div>
+
+  <!-- ===== 导航 ===== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#top" class="nav-logo" data-i18n="nav.logo">作品集<span class="nav-logo-dot">.</span></a>
+      <div class="nav-right">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#about" data-nav="about" data-i18n="nav.about">关于</a></li>
+          <li><a href="#skills" data-nav="skills" data-i18n="nav.skills">技能</a></li>
+          <li><a href="#projects" data-nav="projects" data-i18n="nav.projects">项目</a></li>
+          <li><a href="#contact" data-nav="contact" data-i18n="nav.contact">关于本页</a></li>
+        </ul>
+        <button class="music-btn" id="musicBtn" aria-pressed="false" aria-label="背景音乐" data-i18n-title="ui.music" title="背景音乐（点击开关）">
+          <span class="music-icon">♪</span>
+          <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+        </button>
+        <button class="lang-btn mono" id="langBtn" aria-label="切换语言 / Switch language" title="切换语言 / Switch language">EN</button>
+        <button class="theme-toggle" id="themeToggle" aria-label="切换主题" title="切换主题">
+          <span class="theme-icon">◐</span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="菜单"><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero" id="top">
+    <canvas id="constellation"></canvas>
+    <div class="hero-inner">
+      <p class="hero-eyebrow mono"><span class="hero-rule"></span><span data-i18n="hero.eyebrow">作品集 — 匿名 UI 展示 · 2026</span></p>
+      <h1 class="hero-name serif">
+        <span class="hero-line reveal-up" style="--d:.05s">作品集</span>
+        <span class="hero-line hero-line-en reveal-up" style="--d:.18s">Portfolio<span class="hero-amp">.</span></span>
+      </h1>
+      <p class="hero-typing reveal-up" style="--d:.3s">
+        <span class="mono hero-typing-label" data-i18n="hero.typingLabel">IS</span>
+        <span class="typing serif" id="typing"></span><span class="cursor">_</span>
+      </p>
+      <p class="hero-desc reveal-up" style="--d:.42s" data-i18n="hero.desc">
+        把想法做成能跑起来的东西。喜欢手写每一行代码，也擅长让 AI 加速——<br class="br-desktop" />
+        这里的每一个像素、每一行动画，都是 <strong>手写</strong> 的。
+      </p>
+      <div class="hero-actions reveal-up" style="--d:.54s">
+        <a href="#projects" class="btn btn-solid" data-i18n="hero.cta1">查看项目 <span class="btn-arrow">→</span></a>
+        <a href="#about" class="btn btn-line" data-i18n="hero.cta2">了解本站</a>
+      </div>
+      <div class="hero-meta mono reveal-up" style="--d:.66s">
+        <span>HANDCRAFTED · 2026</span><i>/</i>
+        <span>VANILLA JS · ZERO DEPS</span><i>/</i>
+        <span class="hero-status"><em class="pulse"></em>UI SHOWCASE</span>
+      </div>
+    </div>
+    <a class="scroll-hint mono" href="#about">SCROLL<span class="scroll-line"></span></a>
+  </header>
+
+  <!-- ===== 技术栈跑马灯 ===== -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack"></div>
+  </div>
+
+  <main id="main">
+
+    <!-- ===== 01 关于 ===== -->
+    <section class="section section-cream" id="about">
+      <div class="container">
+        <div class="sec-head">
+          <span class="sec-no mono">01 / 05</span>
+          <span class="sec-rule"></span>
+          <span class="sec-label mono">ABOUT</span>
+        </div>
+        <h2 class="sec-title serif reveal" data-i18n="about.title">关于本站<span class="sec-title-dot">.</span></h2>
+
+        <div class="about-grid">
+          <div class="about-copy reveal">
+            <p class="about-lede serif" data-i18n="about.lede">
+              你好，陌生人！这是一份匿名展示的作品集。从写下第一行 Hello&nbsp;World 开始，
+              我就对「做东西给人用」这件事上了瘾。
+            </p>
+            <p data-i18n="about.p1">
+              这里陈列的是我独立完成的作品：两个 AI 小游戏（<strong>圈层谣言攻防战</strong>、<strong>AI 伪装狼人杀</strong>）
+              和一个浏览器扩展（<strong>刘看山网页助手</strong>），全部零第三方依赖。
+              你正在看的这个网站也是从视觉设计到每一行动画全部手写。
+            </p>
+            <p data-i18n="about.p2">
+              我习惯用 AI 辅助编程提效，但坚持搞懂每一行代码背后的原理——
+              页面上的每个交互你都可以试：主题切换、背景音乐、快捷键、AI 问答。
+              按下 <strong>0-5</strong> 可以直接跳转分区。
+            </p>
+            <div class="about-edu">
+              <div class="edu-item">
+                <span class="edu-year mono">NOW —</span>
+                <span class="edu-school serif" data-i18n="about.eduSchool">自学 + 课堂双轨推进</span>
+                <span class="edu-major" data-i18n="about.eduMajor">Web 全栈 · AI 应用 · 计算机基础</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-cards reveal" style="--d:.15s">
+            <div class="code-card">
+              <div class="code-card-bar">
+                <span class="cc-dot"></span><span class="cc-dot"></span><span class="cc-dot"></span>
+                <span class="cc-name mono">this-site.ts</span>
+              </div>
+              <pre class="mono"><code>const site = {
+  style: "editorial / paper",
+  stack: ["HTML", "CSS", "vanilla JS"],
+  deps: 0,
+  features: ["i18n", "audio", "canvas"],
+  purpose: "UI showcase",
+};</code></pre>
+            </div>
+            <div class="quote-card">
+              <span class="quote-mark serif">“</span>
+              <p class="serif">Talk is cheap. Show me the code.</p>
+              <span class="quote-by mono">— LINUS TORVALDS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 02 技能（深色） ===== -->
+    <section class="section section-ink" id="skills">
+      <div class="container">
+        <div class="sec-head sec-head-dark">
+          <span class="sec-no mono">02 / 05</span>
+          <span class="sec-rule"></span>
+          <span class="sec-label mono">SKILLS</span>
+        </div>
+        <h2 class="sec-title serif reveal" data-i18n="skills.title">技能版图<span class="sec-title-dot">.</span></h2>
+        <p class="sec-sub reveal" data-i18n="skills.sub">不背名词，只列真正写过代码的。</p>
+        <div class="skills-grid" id="skillsGrid"></div>
+      </div>
+    </section>
+
+    <!-- ===== 03 项目 ===== -->
+    <section class="section section-cream" id="projects">
+      <div class="container">
+        <div class="sec-head">
+          <span class="sec-no mono">03 / 05</span>
+          <span class="sec-rule"></span>
+          <span class="sec-label mono">SELECTED WORKS</span>
+        </div>
+        <h2 class="sec-title serif reveal" data-i18n="projects.title">项目精选<span class="sec-title-dot">.</span></h2>
+        <p class="sec-sub reveal" data-i18n="projects.sub">数量不多，每一个都亲手完成。列表会持续更新。</p>
+        <div class="projects-list" id="projectsList"></div>
+      </div>
+    </section>
+
+    <!-- ===== 04 数据带（深色） ===== -->
+    <section class="section section-ink stats-band" id="stats">
+      <div class="container">
+        <div class="sec-head sec-head-dark">
+          <span class="sec-no mono">04 / 05</span>
+          <span class="sec-rule"></span>
+          <span class="sec-label mono">BY THE NUMBERS</span>
+        </div>
+        <div class="stats-grid" id="statsGrid"></div>
+      </div>
+    </section>
+
+    <!-- ===== 05 关于本页 ===== -->
+    <section class="section section-cream contact-section" id="contact">
+      <div class="container">
+        <div class="sec-head">
+          <span class="sec-no mono">05 / 05</span>
+          <span class="sec-rule"></span>
+          <span class="sec-label mono">ABOUT THIS PAGE</span>
+        </div>
+        <h2 class="contact-title serif reveal" data-i18n="contact.title">匿名，是<em>故意的</em>。</h2>
+        <p class="contact-sub reveal" data-i18n="contact.sub">这是一页纯 UI 展示：没有名字，没有联系方式，没有社交账号——作品本身就是全部内容。你看到的每个交互都值得动手试试。</p>
+        <span class="contact-mail serif reveal" data-i18n="contact.headline">匿名展示 · 项目即名片<span class="mail-arrow">◈</span></span>
+
+        <div class="contact-grid reveal" id="contactGrid"></div>
+        <p class="contact-note mono reveal" data-i18n="contact.note">ANONYMOUS BY DESIGN · NOTHING TO CLICK · EVERYTHING TO SEE</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== 页脚（深色） ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="footer-logo serif" data-i18n="footer.logo">作品集<span class="footer-dot">.</span></span>
+        <span class="mono footer-meta">© <span id="year"></span><span> · HANDCRAFTED WITH VANILLA HTML / CSS / JS</span></span>
+      </div>
+      <div class="footer-right mono">
+        <button class="back-top" id="backTop" data-i18n="ui.backTop">回到顶部 ↑</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== AI 助手 ===== -->
+  <button class="chat-fab mono" id="chatFab" aria-label="AI 助手">AI<span class="fab-dot"></span></button>
+  <div class="chat-panel" id="chatPanel" role="dialog" aria-label="AI 助手">
+    <div class="chat-head">
+      <div>
+        <div class="chat-title serif" data-i18n="chat.title">AI 助手</div>
+        <div class="chat-sub mono"><em class="pulse"></em>ASK ME ABOUT THIS SITE</div>
+      </div>
+      <button class="chat-close" id="chatClose" aria-label="关闭">×</button>
+    </div>
+    <div class="chat-msgs" id="chatMsgs"></div>
+    <div class="chat-chips" id="chatChips"></div>
+    <form class="chat-form" id="chatForm">
+      <input type="text" id="chatInput" data-i18n-ph="chat.ph" placeholder="问任何关于本站的问题…" autocomplete="off" />
+      <button type="submit" class="chat-send mono" aria-label="发送">→</button>
+    </form>
+  </div>
+
+  <!-- 复制成功提示 -->
+  <div class="toast mono" id="toast" data-i18n="toast">已复制到剪贴板 ✓</div>
+
+  <script src="js/data.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
